@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:movie_app_ui/components/custom_outline.dart';
 import 'package:movie_app_ui/constants.dart';
+import 'package:movie_app_ui/screens/home_page.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Constants.kBlackColor,
       extendBody: true,
-      body: Container(
+      body: SizedBox(
         width: screenWidth,
         height: screenHight,
         child: Stack(children: [
@@ -30,7 +31,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 200, sigmaY: 200),
-                child: Container(
+                child: const SizedBox(
                   height: 166,
                   width: 166,
                 ),
@@ -93,7 +94,6 @@ class OnboardingScreen extends StatelessWidget {
                     width: screenWidth * 0.8,
                     height: screenWidth * 0.8,
                   ),
-             
                   SizedBox(
                     height: screenHight * 0.09,
                   ),
@@ -121,46 +121,55 @@ class OnboardingScreen extends StatelessWidget {
                   SizedBox(
                     height: screenHight * 0.03,
                   ),
-                  CustomOutline(
-                    strokeWidth: 3,
-                    radius: 20,
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Constants.kPinkColor,
-                        Constants.kGreenColor,
-                      ],
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Constants.kPinkColor.withOpacity(0.5),
-                            Constants.kGreenColor.withOpacity(0.5),
-                          ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
                         ),
+                      );
+                    },
+                    child: CustomOutline(
+                      strokeWidth: 3,
+                      radius: 20,
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Constants.kPinkColor,
+                          Constants.kGreenColor,
+                        ],
                       ),
-                      child: Center(
-                        child: Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: screenHight <= 660 ? 11 : 15,
-                            fontWeight: FontWeight.w700,
-                            color: Constants.kWhiteColor,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Constants.kPinkColor.withOpacity(0.5),
+                              Constants.kGreenColor.withOpacity(0.5),
+                            ],
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Sign Up',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: screenHight <= 660 ? 11 : 15,
+                              fontWeight: FontWeight.w700,
+                              color: Constants.kWhiteColor,
+                            ),
                           ),
                         ),
                       ),
+                      width: 160,
+                      height: 38,
+                      padding: const EdgeInsets.all(3),
                     ),
-                    width: 160,
-                    height: 38,
-                    padding: const EdgeInsets.all(3),
                   ),
-                 
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +197,6 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
           ),
-      
         ]),
       ),
     );
