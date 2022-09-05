@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app_ui/screens/home_page.dart';
+import 'package:movie_app_ui/screens/movie_details.dart';
 import 'package:movie_app_ui/screens/onbording_screen.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.openSans().fontFamily,
       ),
-     home: const HomePage(),
+     home: const OnboardingScreen(),
     );
   }
 }
