@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
+import 'package:flutter_golang_yt/widget/button_widget.dart';
 import 'package:flutter_golang_yt/widget/task_widget.dart';
 
 class AllTasks extends StatelessWidget {
@@ -13,6 +14,25 @@ class AllTasks extends StatelessWidget {
       'Try Smarter',
       'Finish your Task',
     ];
+    final leftEditWidget = Container(
+      alignment: Alignment.centerRight,
+      margin: const EdgeInsets.only(bottom: 10),
+      color: const Color(0xFF2e3253).withOpacity(0.5),
+      child: const Icon(
+        Icons.edit,
+        color: AppColors.kWhiteColor,
+      ),
+    );
+    final rightEditWidget = Container(
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.only(bottom: 10),
+      color: Colors.redAccent,
+      child: const Icon(
+        Icons.delete_forever_sharp,
+        color: AppColors.kWhiteColor,
+      ),
+    );
+
     final screenHight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -121,15 +141,74 @@ class AllTasks extends StatelessWidget {
               ),
               Flexible(
                 child: ListView.builder(
-                  itemCount: myData.length,
-                  itemBuilder: (context, index) {
-                  return Container(
-                    child: TaskWidget(
-                      color: Colors.blueGrey,
-                      text: myData[index],
-                    ),
-                  );
-                }),
+                    itemCount: myData.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        background: leftEditWidget,
+                        secondaryBackground: rightEditWidget,
+                        onDismissed: (direction) {
+                          print('after dismiss');
+                        },
+                        confirmDismiss: (direction) async {
+                          // print('confirming');
+                          if (direction == DismissDirection.startToEnd) {
+                            showModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                barrierColor: Colors.transparent,
+                                context: context,
+                                builder: (_) {
+                                  return Container(
+                                    height: 430,
+
+                                    decoration:  BoxDecoration(
+                                      color:const Color(0xFF2e3253).withOpacity(0.4),
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ButtonWidget(
+                                              backgroundColor:
+                                                  AppColors.mainColor,
+                                              text: 'View',
+                                              textColor: AppColors.kWhiteColor),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          ButtonWidget(
+                                              backgroundColor:
+                                                  AppColors.mainColor,
+                                              text: 'Edit',
+                                              textColor: AppColors.kWhiteColor),
+                                        ],
+                                      ),
+                                    ),
+
+                                    //  Text('test',style:TextStyle(color: Colors.white)),
+                                  );
+                                });
+                            return false;
+                          } else {
+                            return Future.delayed(Duration(seconds: 1),
+                                () => direction == DismissDirection.endToStart);
+                          }
+                        },
+                        key: ObjectKey(index),
+                        child: Container(
+                          child: TaskWidget(
+                            color: Colors.blueGrey,
+                            text: myData[index],
+                          ),
+                        ),
+                      );
+                    }),
               )
             ],
           )

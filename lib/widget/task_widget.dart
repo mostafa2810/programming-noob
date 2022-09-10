@@ -17,7 +17,7 @@ class TaskWidget extends StatelessWidget {
       height: screenHight / 14,
       decoration: BoxDecoration(
         color: Color(0xFFedf0f8),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(0),
       ),
       child: Center(
         child: Text(
