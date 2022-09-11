@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
+import 'package:flutter_golang_yt/screens/add_tasks.dart';
+import 'package:flutter_golang_yt/screens/all_tasks.dart';
 import 'package:flutter_golang_yt/widget/button_widget.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -58,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-         
           Container(
             width: double.maxFinite,
             height: double.maxFinite,
@@ -88,19 +90,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ]),
                 ),
-             SizedBox(height: screenHight/2.5,),
-                ButtonWidget(
-                  backgroundColor: AppColors.kGreenColor.withOpacity(0.6),
-                  text: 'Add Task',
-                  textColor: AppColors.kWhiteColor,
+                SizedBox(
+                  height: screenHight / 2.5,
                 ),
-               const SizedBox(
+                InkWell(
+                    onTap: () {
+                    Get.to(() => AddTask(),
+                        transition: Transition.zoom,
+                        duration: Duration(
+                          milliseconds: 500,
+                        ));
+                  },
+                  child: ButtonWidget(
+                    backgroundColor: AppColors.kGreenColor.withOpacity(0.6),
+                    text: 'Add Task',
+                    textColor: AppColors.kWhiteColor,
+                  ),
+                ),
+                const SizedBox(
                   height: 20,
                 ),
-                const ButtonWidget(
-                  backgroundColor: AppColors.kGreyColor,
-                  text: 'View All',
-                  textColor: AppColors.kWhiteColor,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => AllTasks(),
+                        transition: Transition.fade,
+                        duration: Duration(
+                          seconds: 1,
+                        ));
+                  },
+                  child: const ButtonWidget(
+                    backgroundColor: AppColors.kGreyColor,
+                    text: 'View All',
+                    textColor: AppColors.kWhiteColor,
+                  ),
                 ),
               ],
             ),

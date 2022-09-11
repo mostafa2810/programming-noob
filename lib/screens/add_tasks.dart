@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
 import 'package:flutter_golang_yt/widget/button_widget.dart';
 import 'package:flutter_golang_yt/widget/textfileld_widget.dart';
+import 'package:get/get.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -67,10 +68,12 @@ class AddTask extends StatelessWidget {
                 Column(
                   children: [
                     const SizedBox(
-                      height: 60,
+                      height: 40,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.back();
+                        },
                         icon: const Icon(
                           Icons.arrow_back,
                           color: AppColors.kWhiteColor,
@@ -82,7 +85,8 @@ class AddTask extends StatelessWidget {
                     TextFieldWidget(
                       maxLine: 1,
                       controller: nameController,
-                      text: 'Task Name', borderRadius: 30,
+                      text: 'Task Name',
+                      borderRadius: 30,
                     ),
                     const SizedBox(
                       height: 20,
@@ -90,7 +94,8 @@ class AddTask extends StatelessWidget {
                     TextFieldWidget(
                       maxLine: 3,
                       controller: detailController,
-                      text: 'Task detail', borderRadius: 15,
+                      text: 'Task detail',
+                      borderRadius: 15,
                     ),
                     const SizedBox(
                       height: 20,

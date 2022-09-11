@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
 import 'package:flutter_golang_yt/widget/button_widget.dart';
 import 'package:flutter_golang_yt/widget/task_widget.dart';
+import 'package:get/get.dart';
 
 class AllTasks extends StatelessWidget {
   const AllTasks({Key? key}) : super(key: key);
@@ -82,9 +83,14 @@ class AllTasks extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 20, top: 60),
                 alignment: Alignment.topLeft,
-                child: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.kWhiteColor,
+                child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.kWhiteColor,
+                  ),
                 ),
                 width: double.maxFinite,
                 height: screenHight / 3.2,
@@ -160,8 +166,9 @@ class AllTasks extends StatelessWidget {
                                   return Container(
                                     height: 430,
 
-                                    decoration:  BoxDecoration(
-                                      color:const Color(0xFF2e3253).withOpacity(0.4),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2e3253)
+                                          .withOpacity(0.4),
                                       borderRadius: const BorderRadius.only(
                                         topRight: Radius.circular(20),
                                         topLeft: Radius.circular(20),
